@@ -1,18 +1,20 @@
-# Use official Node.js image from the Docker Hub
+# Step 1: Use a Node.js base image
 FROM node:16
 
-# Copy the package.json and package-lock.json (if available)
-# These files are required to install dependencies
+# Step 2: Set the working directory in the container
+WORKDIR /app
+
+# Step 3: Copy package.json and package-lock.json first to install dependencies
 COPY package*.json ./
 
-# Install the dependencies
-RUN npm install
+# Step 4: Install dependencies
+RUN npm install --legacy-peer-deps
 
-# Copy the rest of the application code to the container
+# Step 5: Copy the rest of the application code
 COPY . .
 
-# Expose the port the app runs on
+# Step 6: Expose the port the app runs on (usually 3000 for Node.js)
 EXPOSE 3000
 
-# Command to run the app
+# Step 7: Start the application
 CMD ["npm", "start"]

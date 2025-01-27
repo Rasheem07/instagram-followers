@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
     "dotenv": "^16.4.7",
