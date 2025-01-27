@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const path = require('path');
+const fetch = require('node-fetch'); // Add this import
 
 const { neon } = require("@neondatabase/serverless");
 
