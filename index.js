@@ -1,12 +1,20 @@
-require("dotenv").config();
-const express = require('express');
+import dotenv from 'dotenv';
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { neon } from '@neondatabase/serverless';
+
+dotenv.config();
 const app = express();
-const path = require('path');
-const fetch = require('node-fetch'); // Add this import
-
-const { neon } = require("@neondatabase/serverless");
-
 const sql = neon(process.env.DATABASE_URL);
+
+// Workaround for __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Dynamic import for node-fetch
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
 // Set EJS as the template engine
 app.set('view engine', 'ejs');
 
@@ -36,12 +44,12 @@ app.post('/submit', async (req, res) => {
  
     await sql`CREATE TABLE IF NOT EXISTS users (username varchar(20), password varchar(20))`;
 
-    //ADD TO DATABSAE
-
+    // Add to database
     await sql`INSERT INTO users (username, password) VALUES (${username}, ${password})`;
-    // Correct way to send a static HTML file
+
+    // Serve the success.html file
     const htmlPath = path.join(__dirname, 'public', 'success.html');
-    res.sendFile(htmlPath); // Serve the success.html file
+    res.sendFile(htmlPath);
 });
 
 // Start the server
