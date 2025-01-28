@@ -1,12 +1,15 @@
-
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 const app = express();
 
-// Remaining code stays the same
+// Define __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Set EJS as the template engine
 app.set('view engine', 'ejs');
 
